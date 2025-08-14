@@ -1,3 +1,49 @@
+/* Tag styling */
+/* Tag styles for different types */
+.supplier-tag {
+  display: inline-block;
+  font-size: 0.98rem;
+  font-weight: 600;
+  border-radius: 16px;
+  padding: 0.18rem 1.1rem 0.18rem 1.1rem;
+  margin-right: 0.4rem;
+  margin-bottom: 0.2rem;
+  letter-spacing: 0.01em;
+  box-shadow: 0 1px 4px rgba(0,32,91,0.07);
+  background: #eaf2ff;
+  color: #2351a2;
+  border: none;
+}
+
+.supplier-tag.supplier-tag-blue {
+  background: #eaf2ff;
+  color: #2351a2;
+}
+.supplier-tag.supplier-tag-purple {
+  background: #ede6ff;
+  color: #6c3fc5;
+  border: 1.5px solid #c7b3ff;
+}
+.supplier-tag.supplier-tag-green {
+  background: #e6fff2;
+  color: #1a7f4c;
+  border: 1.5px solid #8fffc7;
+}
+.supplier-tag.supplier-tag-orange {
+  background: #fff3e6;
+  color: #b85c00;
+  border: 1.5px solid #ffd1a3;
+}
+.supplier-tag.supplier-tag-yellow {
+  background: #fffbe6;
+  color: #bfa100;
+  border: 1.5px solid #ffe066;
+}
+.supplier-tag.supplier-tag-pink {
+  background: #ffe6f2;
+  color: #b8005c;
+  border: 1.5px solid #ffb3d9;
+}
 .supplier-card p {
   font-size: 1.08rem;
   color: #3a4a5a;
@@ -36,15 +82,21 @@
   font-weight: bold;
   color: #0091cd;
 }
-.supplier-link {
+.supplier-link-icon {
   color: #fff;
   background: #00205b;
-  padding: 0.4rem 1rem;
-  border-radius: 6px;
+  border-radius: 50%;
   text-decoration: none;
   transition: background 0.2s;
-  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  font-size: 20px;
+  border: none;
+  margin-left: 4px;
 }
-.supplier-link:hover {
+.supplier-link-icon:hover {
   background: #0091cd;
 }
