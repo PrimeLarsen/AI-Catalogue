@@ -1,0 +1,50 @@
+.supplier-card p {
+  font-size: 1.08rem;
+  color: #3a4a5a;
+  margin: 0 0 0.7rem 0;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+.supplier-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,32,91,0.08);
+  padding: 1.5rem;
+  margin: 1rem 0;
+  transition: box-shadow 0.2s;
+  border: 1.5px solid #0091cd;
+  text-align: left;
+}
+.supplier-card:hover {
+  box-shadow: 0 4px 16px rgba(0,32,91,0.15);
+  border-color: #00205b;
+}
+.supplier-card h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #00205b;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: 0.01em;
+}
+.supplier-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+.gartner-score {
+  font-weight: bold;
+  color: #0091cd;
+}
+.supplier-link {
+  color: #fff;
+  background: #00205b;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.2s;
+  font-weight: 500;
+}
+.supplier-link:hover {
+  background: #0091cd;
+}

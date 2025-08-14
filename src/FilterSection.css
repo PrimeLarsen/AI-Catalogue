@@ -1,0 +1,20 @@
+.filter-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+.filter-input {
+  width: 350px;
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  border: 1.5px solid #0091cd;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s;
+  background: #f4faff;
+  color: #00205b;
+}
+.filter-input:focus {
+  border: 2px solid #00205b;
+}
