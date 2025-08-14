@@ -60,6 +60,7 @@
   transition: box-shadow 0.2s;
   border: 1.5px solid #0091cd;
   text-align: left;
+  position: relative;
 }
 .supplier-card:hover {
   box-shadow: 0 4px 16px rgba(0,32,91,0.15);
@@ -77,6 +78,7 @@
   justify-content: space-between;
   align-items: center;
   margin-top: 1rem;
+  margin-bottom: 2.2rem; /* Add more space below Gartner score */
 }
 .gartner-score {
   font-weight: bold;
@@ -99,4 +101,14 @@
 }
 .supplier-link-icon:hover {
   background: #0091cd;
+}
+/* Always position icons at the bottom left of the card */
+.supplier-icons-row {
+  display: flex;
+  gap: 1.2rem;
+  align-items: center;
+  position: absolute;
+  left: 1.5rem;
+  bottom: 1.5rem;
+  margin-top: 0;
 }
