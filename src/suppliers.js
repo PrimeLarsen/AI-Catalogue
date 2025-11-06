@@ -1,27 +1,5 @@
 // Real AI supplier data
 export const suppliers = [
-<<<<<<< HEAD
-  { id: 1, name: "OpenAI", description: "AI research and deployment company. Creator of ChatGPT and DALL·E.", gartnerScore: 4.9, website: "https://openai.com", logo: "https://logo.clearbit.com/openai.com", documents: [] },
-  { id: 2, name: "IBM Watson", description: "Enterprise AI and data platform for business.", gartnerScore: 4.7, website: "https://www.ibm.com/watson", logo: "https://logo.clearbit.com/ibm.com", documents: [] },
-  { id: 3, name: "Google AI", description: "AI research and products from Google.", gartnerScore: 4.8, website: "https://ai.google", logo: "https://logo.clearbit.com/google.com", documents: [] },
-  { id: 4, name: "Microsoft Azure AI", description: "Cloud-based AI and machine learning services.", gartnerScore: 4.7, website: "https://azure.microsoft.com/en-us/services/machine-learning/", logo: "https://logo.clearbit.com/microsoft.com", documents: [] },
-  { id: 5, name: "Amazon Web Services AI", description: "AI and ML services on AWS.", gartnerScore: 4.6, website: "https://aws.amazon.com/machine-learning/", logo: "https://logo.clearbit.com/aws.amazon.com", documents: [] },
-  { id: 6, name: "DataRobot", description: "Enterprise AI platform for automating machine learning.", gartnerScore: 4.5, website: "https://datarobot.com", logo: "https://logo.clearbit.com/datarobot.com", documents: [] },
-  { id: 7, name: "C3.ai", description: "Enterprise AI, IoT, and analytics software.", gartnerScore: 4.4, website: "https://c3.ai", logo: "https://logo.clearbit.com/c3.ai", documents: [] },
-  { id: 8, name: "Palantir", description: "Big data analytics and AI for enterprises.", gartnerScore: 4.5, website: "https://palantir.com", logo: "https://logo.clearbit.com/palantir.com", documents: [] },
-  { id: 9, name: "UiPath", description: "Robotic process automation (RPA) and AI.", gartnerScore: 4.4, website: "https://uipath.com", logo: "https://logo.clearbit.com/uipath.com", documents: [] },
-  { id: 10, name: "NVIDIA AI", description: "AI hardware and software for deep learning and data science.", gartnerScore: 4.8, website: "https://www.nvidia.com/en-us/ai-data-science/", logo: "https://logo.clearbit.com/nvidia.com", documents: [] },
-  { id: 11, name: "H2O.ai", description: "Open source and enterprise AI/ML platform.", gartnerScore: 4.5, website: "https://h2o.ai", logo: "https://logo.clearbit.com/h2o.ai", documents: [] },
-  { id: 12, name: "SAS AI", description: "AI and analytics for business intelligence.", gartnerScore: 4.6, website: "https://www.sas.com/en_us/solutions/ai.html", logo: "https://logo.clearbit.com/sas.com", documents: [] },
-  { id: 13, name: "Salesforce Einstein", description: "AI for CRM and business automation.", gartnerScore: 4.4, website: "https://www.salesforce.com/products/einstein/overview/", logo: "https://logo.clearbit.com/salesforce.com", documents: [] },
-  { id: 14, name: "Baidu AI", description: "AI and deep learning from Baidu.", gartnerScore: 4.3, website: "https://ai.baidu.com", logo: "https://logo.clearbit.com/baidu.com", documents: [] },
-  { id: 15, name: "SenseTime", description: "AI software for computer vision and deep learning.", gartnerScore: 4.2, website: "https://www.sensetime.com", logo: "https://logo.clearbit.com/sensetime.com", documents: [] },
-  { id: 16, name: "Darktrace", description: "AI for cybersecurity and threat detection.", gartnerScore: 4.3, website: "https://darktrace.com", logo: "https://logo.clearbit.com/darktrace.com", documents: [] },
-  { id: 17, name: "Sift", description: "AI for digital trust and fraud prevention.", gartnerScore: 4.1, website: "https://sift.com", logo: "https://logo.clearbit.com/sift.com", documents: [] },
-  { id: 18, name: "Dataiku", description: "AI and data science platform for enterprises.", gartnerScore: 4.4, website: "https://dataiku.com", logo: "https://logo.clearbit.com/dataiku.com", documents: [] },
-  { id: 19, name: "Cognitivescale", description: "AI for financial services, healthcare, and digital transformation.", gartnerScore: 4.2, website: "https://cognitivescale.com", logo: "https://logo.clearbit.com/cognitivescale.com", documents: [] },
-  { id: 20, name: "Clarifai", description: "AI for computer vision and image/video recognition.", gartnerScore: 4.3, website: "https://clarifai.com", logo: "https://logo.clearbit.com/clarifai.com", documents: [] }
-=======
   { id: 1, name: "OpenAI", description: "Creators of ChatGPT and GPT-4, providing advanced language models and APIs.", gartnerScore: 4.8, website: "https://openai.com", logo: "https://logo.clearbit.com/openai.com", ndaStatus: "approved", documents: [] },
   { id: 2, name: "Anthropic", description: "AI safety and research company, creators of Claude.", gartnerScore: 4.6, website: "https://www.anthropic.com", logo: "https://logo.clearbit.com/anthropic.com", ndaStatus: "approved", documents: [] },
   { id: 3, name: "Google DeepMind", description: "AI research and solutions, part of Google, known for AlphaGo and Gemini.", gartnerScore: 4.9, website: "https://deepmind.google", logo: "https://logo.clearbit.com/deepmind.google", ndaStatus: "approved", documents: [] },
@@ -55,5 +33,4 @@ export const suppliers = [
   { id: 31, name: "OctoML", description: "AI model deployment and optimization platform.", gartnerScore: 4.0, website: "https://octoml.ai", logo: "https://logo.clearbit.com/octoml.ai", ndaStatus: "approved", documents: [] },
   { id: 32, name: "Pinecone", description: "Vector database for AI and semantic search.", gartnerScore: 4.2, website: "https://www.pinecone.io", logo: "https://logo.clearbit.com/pinecone.io", ndaStatus: "approved", documents: [] },
   { id: 33, name: "Weights & Biases", description: "MLOps platform for experiment tracking and collaboration.", gartnerScore: 4.3, website: "https://wandb.ai", logo: "https://logo.clearbit.com/wandb.ai", ndaStatus: "approved", documents: [] }
->>>>>>> 95bebd4 (Add supplier document upload, icon status, and improved card alignment/UX)
 ];

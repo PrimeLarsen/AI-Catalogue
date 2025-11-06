@@ -1,68 +1,35 @@
-import React from 'react';
-  // Modal overlay for supplier presentation
-  const [modalSupplier, setModalSupplier] = useState(null);
-  const openModal = (supplier) => {
-    let tags = [];
-    if (Array.isArray(supplier.tags)) {
-      tags = supplier.tags;
-    } else if (supplier.tag) {
-      tags = [supplier.tag];
-    }
-    setModalSupplier({ ...supplier, tags });
-  };
-  const closeModal = () => setModalSupplier(null);
-
-  // Modal rendering
-  const Modal = ({ children }) => (
-    <div style={{
-      position: 'fixed',
-      top: 0, left: 0, width: '100vw', height: '100vh',
-      background: 'rgba(0,32,91,0.18)',
-      zIndex: 99999,
-      display: 'flex', alignItems: 'center', justifyContent: 'center',
-      overflowY: 'auto',
-    }}>
-      <div style={{ position: 'relative', maxWidth: 700, width: '95vw', background: '#fff', borderRadius: 12, boxShadow: '0 4px 32px rgba(0,32,91,0.18)', padding: 0 }}>
-        <button onClick={closeModal} style={{ position: 'absolute', top: 18, right: 18, background: '#eaf2ff', color: '#2351a2', border: 'none', borderRadius: 6, padding: '0.4rem 1.1rem', fontWeight: 600, fontSize: '1.1rem', cursor: 'pointer', zIndex: 2 }}>Close</button>
-        {children}
-      </div>
-    </div>
-  );
-
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import { suppliers as initialSuppliers } from './suppliers';
 import SupplierCard from './SupplierCard';
 import SupplierDetailsPage from './SupplierDetailsPage';
 import FilterSection from './FilterSection';
-
-
+import InterviewApp from './InterviewApp';
+import SupplierTag from './SupplierTag';
+import { FiGlobe } from 'react-icons/fi';
 
 function App() {
   const [filter, setFilter] = useState('');
   const [suppliers, setSuppliers] = useState(() => {
     const saved = localStorage.getItem('suppliers');
-    // If the saved suppliers are from the old (fictional) list, ignore them and use the new real list
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
-        // Heuristic: if the first supplier is OpenAI, it's the new list
         if (Array.isArray(parsed) && parsed.length > 0 && parsed[0].name === 'OpenAI') {
           return parsed;
         }
       } catch {}
     }
-    // Otherwise, use the new real suppliers
     return initialSuppliers;
   });
+
   const [form, setForm] = useState({ name: '', description: '', gartnerScore: '', website: '', tags: [] });
   const [showForm, setShowForm] = useState(false);
-<<<<<<< HEAD
   const [selectedSupplier, setSelectedSupplier] = useState(null);
-=======
-  const [configSupplier, setConfigSupplier] = useState(null); // For modal config
+  const [configSupplier, setConfigSupplier] = useState(null);
   const [docUpload, setDocUpload] = useState({ file: null, type: 'NDA' });
->>>>>>> 95bebd4 (Add supplier document upload, icon status, and improved card alignment/UX)
+  const [modalSupplier, setModalSupplier] = useState(null);
+  const [showInterview, setShowInterview] = useState(false);
 
   const filteredSuppliers = suppliers.filter(supplier =>
     supplier.name.toLowerCase().includes(filter.toLowerCase()) ||
@@ -72,7 +39,6 @@ function App() {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     if (name === 'tags') {
-      // Split by comma, trim, remove empty
       setForm(f => ({ ...f, tags: value.split(',').map(t => t.trim()).filter(Boolean) }));
     } else {
       setForm(f => ({ ...f, [name]: value }));
@@ -97,9 +63,7 @@ function App() {
     setShowForm(false);
   };
 
-<<<<<<< HEAD
   const handleOpenSupplier = (supplier) => {
-    // Ensure tags is always an array for editing
     let tags = [];
     if (Array.isArray(supplier.tags)) {
       tags = supplier.tags;
@@ -118,39 +82,44 @@ function App() {
     setSelectedSupplier(null);
   };
 
-  // Persist suppliers to localStorage whenever they change
-  useEffect(() => {
-    localStorage.setItem('suppliers', JSON.stringify(suppliers));
-  }, [suppliers]);
+  const openModal = (supplier) => {
+    let tags = [];
+    if (Array.isArray(supplier.tags)) {
+      tags = supplier.tags;
+    } else if (supplier.tag) {
+      tags = [supplier.tag];
+    }
+    setModalSupplier({ ...supplier, tags });
+  };
 
-  if (selectedSupplier) {
-    return <SupplierDetailsPage supplier={selectedSupplier} onBack={handleBack} onSave={handleSaveSupplier} />;
-  }
+  const closeModal = () => setModalSupplier(null);
 
-=======
-  // Modal config handlers
   const openConfigModal = (supplier) => {
     setConfigSupplier(supplier);
     setDocUpload({ file: null, type: 'NDA' });
   };
+
   const closeConfigModal = () => setConfigSupplier(null);
+
   const handleConfigChange = (e) => {
     const { name, value } = e.target;
     setConfigSupplier(s => ({ ...s, [name]: value }));
   };
+
   const handleConfigSave = (e) => {
     e.preventDefault();
     setSuppliers(sups => sups.map(s => s.id === configSupplier.id ? { ...configSupplier, gartnerScore: parseFloat(configSupplier.gartnerScore) } : s));
     closeConfigModal();
   };
 
-  // Document upload handlers
   const handleDocTypeChange = (e) => {
     setDocUpload(d => ({ ...d, type: e.target.value }));
   };
+
   const handleDocFileChange = (e) => {
     setDocUpload(d => ({ ...d, file: e.target.files[0] }));
   };
+
   const handleDocUpload = (e) => {
     e.preventDefault();
     if (!docUpload.file) return;
@@ -170,6 +139,7 @@ function App() {
     };
     reader.readAsDataURL(docUpload.file);
   };
+
   const handleDocDelete = (idx) => {
     setConfigSupplier(s => ({
       ...s,
@@ -177,7 +147,37 @@ function App() {
     }));
   };
 
->>>>>>> 95bebd4 (Add supplier document upload, icon status, and improved card alignment/UX)
+  useEffect(() => {
+    localStorage.setItem('suppliers', JSON.stringify(suppliers));
+  }, [suppliers]);
+
+  // Modal rendering
+  const Modal = ({ children }) => (
+    <div style={{
+      position: 'fixed',
+      top: 0, left: 0, width: '100vw', height: '100vh',
+      background: 'rgba(0,32,91,0.18)',
+      zIndex: 99999,
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      overflowY: 'auto',
+    }}>
+      <div style={{ position: 'relative', maxWidth: 700, width: '95vw', background: '#fff', borderRadius: 12, boxShadow: '0 4px 32px rgba(0,32,91,0.18)', padding: 0 }}>
+        <button onClick={closeModal} style={{ position: 'absolute', top: 18, right: 18, background: '#eaf2ff', color: '#2351a2', border: 'none', borderRadius: 6, padding: '0.4rem 1.1rem', fontWeight: 600, fontSize: '1.1rem', cursor: 'pointer', zIndex: 2 }}>Close</button>
+        {children}
+      </div>
+    </div>
+  );
+
+  // Show Interview App
+  if (showInterview) {
+    return <InterviewApp onBack={() => setShowInterview(false)} />;
+  }
+
+  // Show Supplier Details Page
+  if (selectedSupplier) {
+    return <SupplierDetailsPage supplier={selectedSupplier} onBack={handleBack} onSave={handleSaveSupplier} />;
+  }
+
   return (
     <div>
       <header className="catalog-header">
@@ -189,9 +189,42 @@ function App() {
       <div className="catalog-subtitle">
         We pioneer and drive the digital transformation in Operations
       </div>
-      <button style={{marginBottom: '1.5rem', background: '#0091cd', color: '#fff', border: 'none', borderRadius: 8, padding: '0.6rem 1.2rem', fontWeight: 600, fontSize: '1rem', cursor: 'pointer'}} onClick={() => setShowForm(f => !f)}>
-        {showForm ? 'Cancel' : 'Add New Supplier'}
-      </button>
+
+      <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
+        <button
+          style={{
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            color: '#fff',
+            border: 'none',
+            borderRadius: 8,
+            padding: '0.6rem 1.2rem',
+            fontWeight: 600,
+            fontSize: '1rem',
+            cursor: 'pointer',
+            boxShadow: '0 4px 12px rgba(102, 126, 234, 0.4)'
+          }}
+          onClick={() => setShowInterview(true)}
+        >
+          🎤 Start AI Case Interview
+        </button>
+        <button
+          style={{
+            marginBottom: '0rem',
+            background: '#0091cd',
+            color: '#fff',
+            border: 'none',
+            borderRadius: 8,
+            padding: '0.6rem 1.2rem',
+            fontWeight: 600,
+            fontSize: '1rem',
+            cursor: 'pointer'
+          }}
+          onClick={() => setShowForm(f => !f)}
+        >
+          {showForm ? 'Cancel' : 'Add New Supplier'}
+        </button>
+      </div>
+
       {showForm && (
         <form onSubmit={handleAddSupplier} style={{background: '#fff', border: '1.5px solid #0091cd', borderRadius: 12, padding: '1.5rem', marginBottom: '2rem', maxWidth: 500, marginLeft: 'auto', marginRight: 'auto', boxShadow: '0 2px 8px rgba(0,32,91,0.08)'}}>
           <div style={{marginBottom: '1rem'}}>
@@ -212,24 +245,34 @@ function App() {
           <button type="submit" style={{background: '#00205b', color: '#fff', border: 'none', borderRadius: 8, padding: '0.6rem 1.2rem', fontWeight: 600, fontSize: '1rem', cursor: 'pointer'}}>Add Supplier</button>
         </form>
       )}
+
       <FilterSection filter={filter} setFilter={setFilter} />
+
       <div className="supplier-list">
         {filteredSuppliers.length === 0 ? (
           <p>No suppliers found.</p>
         ) : (
-<<<<<<< HEAD
           <>
-            {filteredSuppliers.map(supplier => (
-              <div key={supplier.id} style={{ cursor: 'pointer' }}
-                onClick={e => {
-                  // Only open modal if not clicking a button or link
-                  if (e.target.closest('button') || e.target.closest('a')) return;
-                  openModal(supplier);
-                }}
-              >
-                <SupplierCard {...supplier} onOpen={() => handleOpenSupplier(supplier)} />
-              </div>
-            ))}
+            {filteredSuppliers.map(supplier => {
+              const hasNDA = (supplier.documents || []).some(doc => doc.type === 'NDA');
+              const hasISSafety = (supplier.documents || []).some(doc => doc.type === 'IS Safety');
+              return (
+                <div key={supplier.id} style={{ cursor: 'pointer' }}
+                  onClick={e => {
+                    if (e.target.closest('button') || e.target.closest('a')) return;
+                    openModal(supplier);
+                  }}
+                >
+                  <SupplierCard
+                    {...supplier}
+                    ndaStatus={hasNDA ? 'approved' : 'missing'}
+                    isSafetyStatus={hasISSafety ? 'approved' : 'missing'}
+                    onOpen={() => handleOpenSupplier(supplier)}
+                    onConfig={() => openConfigModal(supplier)}
+                  />
+                </div>
+              );
+            })}
             {modalSupplier && (
               <Modal>
                 <div style={{ padding: 40 }}>
@@ -257,25 +300,9 @@ function App() {
               </Modal>
             )}
           </>
-=======
-          filteredSuppliers.map(supplier => {
-            // Check for NDA and IS Safety docs
-            const hasNDA = (supplier.documents || []).some(doc => doc.type === 'NDA');
-            const hasISSafety = (supplier.documents || []).some(doc => doc.type === 'IS Safety');
-            return (
-              <SupplierCard
-                key={supplier.id}
-                {...supplier}
-                ndaStatus={hasNDA ? 'approved' : 'missing'}
-                isSafetyStatus={hasISSafety ? 'approved' : 'missing'}
-                onConfig={() => openConfigModal(supplier)}
-              />
-            );
-          })
->>>>>>> 95bebd4 (Add supplier document upload, icon status, and improved card alignment/UX)
         )}
       </div>
-      {/* Config Modal */}
+
       {configSupplier && (
         <div style={{
           position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh',
@@ -314,7 +341,6 @@ function App() {
               <div style={{marginBottom: '2rem'}}>
                 <input name="website" value={configSupplier.website} readOnly disabled placeholder="Website URL" style={{width: '100%', padding: '1.2rem', borderRadius: 10, border: '1.5px solid #0091cd', fontSize: '1.2rem', background: '#f7fafc', color: '#111', opacity: 0.7, cursor: 'not-allowed'}} />
               </div>
-              {/* Document Upload Section */}
               <div style={{marginBottom: '2.5rem', background: '#f7fafc', borderRadius: 10, padding: '1.5rem'}}>
                 <h3 style={{marginTop: 0, color: '#2351a2'}}>Documents</h3>
                 <form onSubmit={handleDocUpload} style={{display: 'flex', gap: '1rem', alignItems: 'center', marginBottom: '1.2rem'}}>
