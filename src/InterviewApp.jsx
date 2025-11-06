@@ -3,7 +3,7 @@ import { conductInterview } from './services/interviewService';
 import InterviewChat from './InterviewChat';
 import InterviewSummary from './InterviewSummary';
 
-function InterviewApp({ onBack }) {
+function InterviewApp({ onBack = null }) {
   const [messages, setMessages] = useState([]);
   const [userInput, setUserInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -146,23 +146,25 @@ function InterviewApp({ onBack }) {
             >
               Start Interview
             </button>
-            <button
-              type="button"
-              onClick={onBack}
-              style={{
-                width: '100%',
-                background: '#f0f0f0',
-                color: '#333',
-                border: 'none',
-                borderRadius: 8,
-                padding: '0.8rem',
-                fontSize: '1rem',
-                fontWeight: 600,
-                cursor: 'pointer'
-              }}
-            >
-              Back to Catalog
-            </button>
+            {onBack && (
+              <button
+                type="button"
+                onClick={onBack}
+                style={{
+                  width: '100%',
+                  background: '#f0f0f0',
+                  color: '#333',
+                  border: 'none',
+                  borderRadius: 8,
+                  padding: '0.8rem',
+                  fontSize: '1rem',
+                  fontWeight: 600,
+                  cursor: 'pointer'
+                }}
+              >
+                Back to Catalog
+              </button>
+            )}
           </form>
           <p style={{ fontSize: '0.85rem', color: '#888', marginTop: '1.5rem', textAlign: 'center' }}>
             Your API key is stored locally and never sent to our servers
@@ -206,20 +208,22 @@ function InterviewApp({ onBack }) {
           >
             Reset API Key
           </button>
-          <button
-            onClick={onBack}
-            style={{
-              background: '#00205b',
-              color: '#fff',
-              border: 'none',
-              borderRadius: 6,
-              padding: '0.6rem 1.2rem',
-              fontWeight: 600,
-              cursor: 'pointer'
-            }}
-          >
-            Back to Catalog
-          </button>
+          {onBack && (
+            <button
+              onClick={onBack}
+              style={{
+                background: '#00205b',
+                color: '#fff',
+                border: 'none',
+                borderRadius: 6,
+                padding: '0.6rem 1.2rem',
+                fontWeight: 600,
+                cursor: 'pointer'
+              }}
+            >
+              Back to Catalog
+            </button>
+          )}
         </div>
       </div>
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function InterviewSummary({ summary, onStartNew, onBack, onResetApiKey }) {
+function InterviewSummary({ summary, onStartNew, onBack = null, onResetApiKey }) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
@@ -77,21 +77,23 @@ function InterviewSummary({ summary, onStartNew, onBack, onResetApiKey }) {
           >
             Start New Interview
           </button>
-          <button
-            onClick={onBack}
-            style={{
-              background: '#00205b',
-              color: '#fff',
-              border: 'none',
-              borderRadius: 8,
-              padding: '1rem 2rem',
-              fontSize: '1.1rem',
-              fontWeight: 600,
-              cursor: 'pointer'
-            }}
-          >
-            Back to Catalog
-          </button>
+          {onBack && (
+            <button
+              onClick={onBack}
+              style={{
+                background: '#00205b',
+                color: '#fff',
+                border: 'none',
+                borderRadius: 8,
+                padding: '1rem 2rem',
+                fontSize: '1.1rem',
+                fontWeight: 600,
+                cursor: 'pointer'
+              }}
+            >
+              Back to Catalog
+            </button>
+          )}
           <button
             onClick={onResetApiKey}
             style={{
@@ -113,9 +115,10 @@ function InterviewSummary({ summary, onStartNew, onBack, onResetApiKey }) {
           <h3 style={{ margin: '0 0 0.5rem 0', color: '#0066cc', fontSize: '1.1rem' }}>What's Next?</h3>
           <ul style={{ margin: 0, paddingLeft: '1.5rem', color: '#333', lineHeight: '1.6' }}>
             <li>Review the gathered information with your team</li>
-            <li>Identify potential AI suppliers from the catalog</li>
+            <li>Identify potential AI solutions and vendors</li>
             <li>Refine your requirements based on the insights</li>
-            <li>Start reaching out to suppliers for proposals</li>
+            <li>Create a project plan and timeline</li>
+            <li>Start evaluating AI tools and services</li>
           </ul>
         </div>
       </div>
